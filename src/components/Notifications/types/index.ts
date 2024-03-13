@@ -60,3 +60,5 @@ export interface Notifyable {
   notification: () => React.ReactNode;
 }
 export type NotificationCollectionType = Array<NotificationType>;
+
+export type Implements<T> = new (data: any) => T;

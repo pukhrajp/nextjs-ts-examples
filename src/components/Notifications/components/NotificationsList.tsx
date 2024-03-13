@@ -1,4 +1,4 @@
-import { NotificationCollectionType } from '../types';
+import { Implements, NotificationCollectionType, Notifyable } from '../types';
 import { NotificationItem } from './NotificationItem';
 import { PhotosUploadClass } from './PhotosUploadNotification/PhotosUploadClass';
 import { ProjectInviteClass } from './ProjectInviteNotification/ProjectInviteClass';
@@ -8,7 +8,13 @@ interface NotificationsListProps {
   data: NotificationCollectionType;
 }
 
-const NotificationGenerators: any = {
+interface NotificationGeneratorsType{
+  PROJECT_INVITE :Implements<Notifyable>;
+  PHOTOS_UPLOAD:Implements<Notifyable>;
+  SHARED_POST:Implements<Notifyable>;
+}
+
+const NotificationGenerators:NotificationGeneratorsType = {
   PROJECT_INVITE: ProjectInviteClass,
   PHOTOS_UPLOAD: PhotosUploadClass,
   SHARED_POST: SharedPostClass,
