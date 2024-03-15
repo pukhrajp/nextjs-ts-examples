@@ -57,6 +57,6 @@ export type NotificationType =
   | ProjectInviteNotificationType;
 
 export interface Notifyable {
-  notification: () => React.ReactNode;
+  notification: (item: NotificationType) => React.ReactNode;
 }
 export type NotificationCollectionType = Array<NotificationType>;
