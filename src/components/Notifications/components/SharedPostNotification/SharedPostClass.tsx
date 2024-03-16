@@ -2,13 +2,13 @@ import React from 'react';
 import { Notifyable, SharedPostNotificationType } from '../../types';
 
 export class SharedPostClass implements Notifyable {
-  constructor(public data: SharedPostNotificationType) {}
+  constructor() {}
 
-  notification(): React.ReactNode {
-    const { metaData } = this.data;
+  notification(data: SharedPostNotificationType): React.ReactNode {
+    const { metaData } = data;
     return (
       <div>
-        {this.data.user.name} shared a post {metaData.post.title}
+        {data.user.name} shared a post {metaData.post.title}
       </div>
     );
   }

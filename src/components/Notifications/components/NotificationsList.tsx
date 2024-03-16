@@ -1,4 +1,4 @@
-import { Implements, NotificationCollectionType, Notifyable } from '../types';
+import {   NotificationCollectionType, Notifyable, PhotosUploadNotificationType, ProjectInviteNotificationType, SharedPostNotificationType } from '../types';
 import { NotificationItem } from './NotificationItem';
 import { PhotosUploadClass } from './PhotosUploadNotification/PhotosUploadClass';
 import { ProjectInviteClass } from './ProjectInviteNotification/ProjectInviteClass';
@@ -8,31 +8,29 @@ interface NotificationsListProps {
   data: NotificationCollectionType;
 }
 
-interface NotificationGeneratorsType{
-  PROJECT_INVITE :Implements<Notifyable>;
-  PHOTOS_UPLOAD:Implements<Notifyable>;
-  SHARED_POST:Implements<Notifyable>;
-}
 
-const NotificationGenerators:NotificationGeneratorsType = {
-  PROJECT_INVITE: ProjectInviteClass,
-  PHOTOS_UPLOAD: PhotosUploadClass,
-  SHARED_POST: SharedPostClass,
+
+const NotificationGenerators:{[key:string]:Notifyable}= {
+  PROJECT_INVITE:new ProjectInviteClass(),
+  PHOTOS_UPLOAD: new PhotosUploadClass(),
+  SHARED_POST: new SharedPostClass(),
 };
 
 function NotificationsList({ data }: NotificationsListProps) {
+
   return (
     <div>
-      {data.map((item) => {
+      {data.map((item,index) => {
         // let notification;
         // if (item.type === 'PHOTOS_UPLOAD')
         //   notification = new PhotosUploadClass(item);
         // else if (item.type === 'PROJECT_INVITE')
-        //   notification = new ProjectInviteClass(item);
+        //   notification = new lProjectInviteClass(item);
         // else notification = new SharedPostClass(item);
-
-        let notification = new NotificationGenerators[item.type](item);
-        return <NotificationItem key={item.id} item={notification} />;
+        
+      
+        let notification = NotificationGenerators[item.type];
+        return <NotificationItem data={item} key={index} item={notification} />
       })}
     </div>
   );

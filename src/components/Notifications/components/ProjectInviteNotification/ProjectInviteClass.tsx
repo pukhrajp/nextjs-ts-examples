@@ -2,13 +2,13 @@ import React from 'react';
 import { Notifyable, ProjectInviteNotificationType } from '../../types';
 
 export class ProjectInviteClass implements Notifyable {
-  constructor(public data: ProjectInviteNotificationType) {}
+  constructor( ) {}
 
-  notification(): React.ReactNode {
-    const { metaData } = this.data;
+  notification(data: ProjectInviteNotificationType): React.ReactNode {
+    const { metaData } =data;
     return (
       <div>
-        {this.data.user.name} has invited you to the project{' '}
+        {data.user.name} has invited you to the project{' '}
         {metaData.project.name}
       </div>
     );
