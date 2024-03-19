@@ -1,7 +1,10 @@
-import { NotificationType, Notifyable } from '../types';
+import { Notifyable } from '../types';
 
+interface NotificationItemProps {
+  item: Notifyable;
+}
 
-function NotificationItem({ item ,data}: {item:Notifyable,data:NotificationType}) {
+function NotificationItem({ item }: NotificationItemProps) {
   return (
     <div
       style={{
@@ -11,7 +14,7 @@ function NotificationItem({ item ,data}: {item:Notifyable,data:NotificationType}
         color: '#fff',
       }}
     >
-      {item.notification(data)}
+      {item.notification()}
     </div>
   );
 }

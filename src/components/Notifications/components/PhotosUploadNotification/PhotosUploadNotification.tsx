@@ -2,15 +2,15 @@ import Image from 'next/image';
 import React from 'react';
 import { Notifyable, PhotosUploadNotificationType } from '../../types';
 
-export class PhotosUploadClass implements Notifyable{
-  constructor() {}
+export class PhotosUploadNotification implements Notifyable {
+  constructor(public data: PhotosUploadNotificationType) {}
 
-  notification(data: PhotosUploadNotificationType): React.ReactNode {
-    const { metaData } = data;
+  notification(): React.ReactNode {
+    const { metaData } = this.data;
     return (
       <div>
         <div>
-          {data.user.name} has uploaded {metaData.count} photos in the
+          {this.data.user.name} has uploaded {metaData.count} photos in the
           group {metaData.group}
         </div>
         <ul style={{ display: 'inline' }}>

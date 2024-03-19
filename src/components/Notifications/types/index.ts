@@ -43,12 +43,13 @@ export interface PhotosUploadNotificationType {
   metaData: { count: number; group: string; photos: Photo[] };
 }
 
-export type NotificationType =
-  | SharedPostNotificationType
-  | PhotosUploadNotificationType
-  | ProjectInviteNotificationType;
+// export type NotificationType =
+//   | SharedPostNotificationType
+//   | PhotosUploadNotificationType
+//   | ProjectInviteNotificationType;
 
 export interface Notifyable {
-  notification(data:NotificationType): React.ReactNode;
+  notification(): React.ReactNode;
 }
-export type NotificationCollectionType = Array<NotificationType>;
+
+export type Implements<T> = new (...args: any[]) => T;
