@@ -1,13 +1,17 @@
-import { NotificationType } from '../types';
-import { NotificationItem } from './NotificationItem';
-import { PhotosUploadClass } from './PhotosUploadNotification/PhotosUploadClass';
-import { ProjectInviteClass } from './ProjectInviteNotification/ProjectInviteClass';
-import { SharedPostClass } from './SharedPostNotification/SharedPostClass';
 
-const NotificationGenerators: any = {
-  PROJECT_INVITE: ProjectInviteClass,
-  PHOTOS_UPLOAD: PhotosUploadClass,
-  SHARED_POST: SharedPostClass,
+import {   NotificationCollectionType, Notifyable, PhotosUploadNotificationType, ProjectInviteNotificationType, SharedPostNotificationType } from '../types';
+
+
+interface NotificationsListProps {
+  data: NotificationCollectionType;
+}
+
+
+
+const NotificationGenerators:{[key:string]:Notifyable}= {
+  PROJECT_INVITE:new ProjectInviteClass(),
+  PHOTOS_UPLOAD: new PhotosUploadClass(),
+  SHARED_POST: new SharedPostClass(),
 };
 
 interface NotificationsListProps {
@@ -15,11 +19,12 @@ interface NotificationsListProps {
 }
 
 function NotificationsList({ data }: NotificationsListProps) {
+
   return (
     <div>
-      {data.map((item) => {
-        let notification = new NotificationGenerators[item.type](item);
-        return <NotificationItem key={item.id} item={notification} />;
+      {data.map((item,index) => {
+        let notification = NotificationGenerators[item.type];
+        return <NotificationItem data={item} key={index} item={notification} />
       })}
     </div>
   );

@@ -1,12 +1,12 @@
 import React from 'react';
-
+export interface User {
+  id: number;
+  name: string;
+  profile_pic: string;
+};
 export interface SharedPostNotificationType {
   id: number;
-  user: {
-    id: number;
-    name: string;
-    profile_pic: string;
-  };
+  user: User;
   type: 'SHARED_POST';
   timeRange: string;
   createdAt: string;
@@ -19,11 +19,7 @@ export interface SharedPostNotificationType {
 
 export interface ProjectInviteNotificationType {
   id: number;
-  user: {
-    id: number;
-    name: string;
-    profile_pic: string;
-  };
+  user: User;
   type: 'PROJECT_INVITE';
   timeRange: string;
   createdAt: string;
@@ -40,11 +36,7 @@ export interface Photo {
 
 export interface PhotosUploadNotificationType {
   id: number;
-  user: {
-    id: number;
-    name: string;
-    profile_pic: string;
-  };
+  user: User
   type: 'PHOTOS_UPLOAD';
   timeRange: string;
   createdAt: string;
@@ -57,6 +49,6 @@ export type NotificationType =
   | ProjectInviteNotificationType;
 
 export interface Notifyable {
-  notification: (item: NotificationType) => React.ReactNode;
+  notification(data:NotificationType): React.ReactNode;
 }
 export type NotificationCollectionType = Array<NotificationType>;
